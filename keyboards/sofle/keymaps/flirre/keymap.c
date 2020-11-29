@@ -316,22 +316,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 register_mods(mod_config(MOD_LCTL));
                 register_mods(mod_config(MOD_LGUI));
-                register_code(UP);
+                register_code(KC_UP);
             } else {
                 unregister_mods(mod_config(MOD_LCTL));
                 unregister_mods(mod_config(MOD_LGUI));
-                unregister_code(UP);
+                unregister_code(KC_UP);
             }
             return false;
         case KC_WRK_SPC_PREV:
             if (record->event.pressed) {
                 register_mods(mod_config(MOD_LCTL));
                 register_mods(mod_config(MOD_LGUI));
-                register_code(UP);
+                register_code(KC_UP);
             } else {
                 unregister_mods(mod_config(MOD_LCTL));
                 unregister_mods(mod_config(MOD_LGUI));
-                unregister_code(UP);
+                unregister_code(KC_UP);
             }
             return false;
     }
