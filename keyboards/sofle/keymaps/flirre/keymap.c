@@ -348,9 +348,9 @@ void encoder_update_user(uint8_t index, bool clockwise) {
         }
     } else if (index == 1) {
         if (clockwise) {
-            tap_code(KC_WRK_SPC_PREV);
+            tap_code16(KC_WRK_SPC_PREV);
         } else {
-            tap_code(KC_WRK_SPC_NEXT);
+            tap_code16(KC_WRK_SPC_NEXT);
         }
     }
 }
