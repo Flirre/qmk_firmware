@@ -326,11 +326,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 register_mods(mod_config(MOD_LCTL));
                 register_mods(mod_config(MOD_LGUI));
-                register_code(KC_UP);
+                register_code(KC_DOWN);
             } else {
                 unregister_mods(mod_config(MOD_LCTL));
                 unregister_mods(mod_config(MOD_LGUI));
-                unregister_code(KC_UP);
+                unregister_code(KC_DOWN);
             }
             return false;
     }
