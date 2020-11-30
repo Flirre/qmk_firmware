@@ -8,7 +8,7 @@ enum sofle_layers {
     _ADJUST,
 };
 
-enum custom_keycodes { KC_QWERTY = SAFE_RANGE, KC_LOWER, KC_RAISE, KC_ADJUST, KC_PRVWD, KC_NXTWD, KC_LSTRT, KC_LEND, KC_DLINE, KC_WRK_SPC_NEXT, KC_WRK_SPC_PREV };
+enum custom_keycodes { KC_QWERTY = SAFE_RANGE, KC_LOWER, KC_RAISE, KC_ADJUST, KC_PRVWD, KC_NXTWD, KC_LSTRT, KC_LEND, KC_DLINE };
 
 enum unicode_names {
     SE_AA_CAPITAL,
@@ -20,10 +20,10 @@ enum unicode_names {
 };
 
 const uint32_t PROGMEM unicode_map[] = {
-    [SE_AA_CAPITAL] = 0x00C4,  // Ä
-    [SE_AA_SMALL]   = 0x00E4,  // ä
-    [SE_AE_CAPITAL] = 0x00C5,  // Å
-    [SE_AE_SMALL]   = 0x00E5,  // å
+    [SE_AE_CAPITAL] = 0x00C4,  // Ä
+    [SE_AE_SMALL]   = 0x00E4,  // ä
+    [SE_AA_CAPITAL] = 0x00C5,  // Å
+    [SE_AA_SMALL]   = 0x00E5,  // å
     [SE_OE_CAPITAL] = 0x00D6,  // Ö
     [SE_OE_SMALL]   = 0x00F6,  // ö
 };
@@ -32,7 +32,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
      * QWERTY
      * ,-----------------------------------------.                    ,-----------------------------------------.
-     * |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `   |
+     * |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  \   |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
      * | ESC  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  | Bspc |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *            `----------------------------------'           '------''---------------------------'
      */
 
-    [_QWERTY] = LAYOUT(KC_GRV, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_GRV, KC_ESC, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPC, KC_TAB, KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT, KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_MUTE, XXXXXXX, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT, KC_LGUI, KC_LALT, KC_LCTRL, KC_LOWER, KC_ENT, KC_SPC, KC_RAISE, KC_LCTRL, KC_LALT, KC_LGUI),
+    [_QWERTY] = LAYOUT(KC_GRV, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_BSLS, KC_ESC, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPC, KC_TAB, KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT, KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_MUTE, XXXXXXX, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT, KC_LGUI, KC_LALT, KC_LCTRL, KC_LOWER, KC_ENT, KC_SPC, KC_RAISE, KC_LCTRL, KC_LALT, KC_LGUI),
 
     /* LOWER
      * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -311,28 +311,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_Z);
             }
             return false;
-        case KC_WRK_SPC_NEXT:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LCTL));
-                register_mods(mod_config(MOD_LGUI));
-                register_code(KC_UP);
-            } else {
-                unregister_mods(mod_config(MOD_LCTL));
-                unregister_mods(mod_config(MOD_LGUI));
-                unregister_code(KC_UP);
-            }
-            return false;
-        case KC_WRK_SPC_PREV:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LCTL));
-                register_mods(mod_config(MOD_LGUI));
-                register_code(KC_DOWN);
-            } else {
-                unregister_mods(mod_config(MOD_LCTL));
-                unregister_mods(mod_config(MOD_LGUI));
-                unregister_code(KC_DOWN);
-            }
-            return false;
     }
     return true;
 }
@@ -348,9 +326,19 @@ void encoder_update_user(uint8_t index, bool clockwise) {
         }
     } else if (index == 1) {
         if (clockwise) {
-            tap_code16(KC_WRK_SPC_PREV);
+            register_mods(mod_config(MOD_LCTL));
+            register_mods(mod_config(MOD_LGUI));
+            register_code(KC_UP);
+            unregister_mods(mod_config(MOD_LCTL));
+            unregister_mods(mod_config(MOD_LGUI));
+            unregister_code(KC_UP);
         } else {
-            tap_code16(KC_WRK_SPC_NEXT);
+            register_mods(mod_config(MOD_LCTL));
+            register_mods(mod_config(MOD_LGUI));
+            register_code(KC_DOWN);
+            unregister_mods(mod_config(MOD_LCTL));
+            unregister_mods(mod_config(MOD_LGUI));
+            unregister_code(KC_DOWN);
         }
     }
 }
