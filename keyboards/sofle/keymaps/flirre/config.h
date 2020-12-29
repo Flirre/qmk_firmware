@@ -7,4 +7,3 @@ for more options.
 #define UNICODE_SELECTED_MODES UC_LNX
 #define OLED_BRIGHTNESS 200
 #define OLED_TIMEOUT 300000
-#define TAPPING_TERM 300
