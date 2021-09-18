@@ -170,34 +170,29 @@ static void render_logo(void) {
 
 static void print_status_narrow(void) {
     // Print current mode
-    oled_write_P(PSTR("\n\n"), false);
+    oled_write_P(PSTR("\n"), false);
     oled_write_ln_P(PSTR("MODE"), false);
     oled_write_ln_P(PSTR(""), false);
     if (keymap_config.swap_lctl_lgui) {
-        oled_write_ln_P(PSTR("MAC"), false);
+        oled_write_ln_P(PSTR("MacOS"), false);
     } else {
-        oled_write_ln_P(PSTR("WIN"), false);
+        oled_write_ln_P(PSTR("Linux"), false);
     }
 
-    switch (get_highest_layer(default_layer_state)) {
-        case _QWERTY:
-            oled_write_ln_P(PSTR("Qwrt"), false);
-            break;
-        default:
-            oled_write_P(PSTR("Undef"), false);
-    }
     oled_write_P(PSTR("\n\n"), false);
     // Print current layer
     oled_write_ln_P(PSTR("LAYER"), false);
-    oled_write_ln_P(PSTR("SHIFT"), false);
     switch (get_highest_layer(layer_state)) {
         case _QWERTY:
-            oled_write_P(PSTR("Base \n"), false);
+        case _SHIFTED:
+            oled_write_P(PSTR("Base\n"), false);
             break;
         case _RAISE:
+        case _RAISESHIFT:
             oled_write_P(PSTR("Raise"), false);
             break;
         case _LOWER:
+        case _LOWERSHIFT:
             oled_write_P(PSTR("Lower"), false);
             break;
         case _ADJUST:
@@ -206,11 +201,22 @@ static void print_status_narrow(void) {
         default:
             oled_write_ln_P(PSTR("Undef"), false);
     }
-    oled_write_P(PSTR("\n\n"), false);
-    //led_t led_usb_state = host_keyboard_led_state();
-    oled_write_ln_P(PSTR("SHIFT"), true);
 
-    //oled_write_ln_P(PSTR("CPSLK"), led_usb_state.caps_lock);
+    oled_write_P(PSTR("\n\n\n\n\n"), false);
+    switch (get_highest_layer(layer_state)) {
+        case _QWERTY:
+        case _RAISE:
+        case _LOWER:
+        case _ADJUST:
+            oled_write_ln_P(PSTR("SHIFT"), false);
+            break;
+        case _SHIFTED:
+        case _RAISESHIFT:
+        case _LOWERSHIFT:
+        default:
+            oled_write_ln_P(PSTR("SHIFT"), true);
+    }
+    //led_t led_usb_state = host_keyboard_led_state();
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
@@ -256,6 +262,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             } else {
                 layer_off(_RAISE);
                 update_tri_layer(_LOWER, _RAISE, _ADJUST);
+                update_tri_layer(_RAISE, _SHIFTED, _RAISESHIFT);
             }
             return false;
         case KC_ADJUST:
