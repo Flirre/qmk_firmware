@@ -3,12 +3,13 @@
 
 enum sofle_layers {
     _QWERTY,
-   _SHIFTED,
+    _SHIFTED,
     _LOWER,
     _LOWERSHIFT,
     _RAISE,
     _RAISESHIFT,
     _ADJUST,
+    _GAMING
 };
 
 enum custom_keycodes { KC_QWERTY = SAFE_RANGE, KC_LOWER, KC_RAISE, KC_ADJUST, KC_SHIFT, KC_PRVWD, KC_NXTWD, KC_LSTRT, KC_LEND, KC_DLINE };
@@ -34,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT(SE_GRV, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, SE_BSLS,
                        KC_ESC, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPC,
                        LCTL_T(KC_TAB), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, SE_SCLN, SE_QUOT,
-                       KC_SHIFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_MUTE, XXXXXXX, KC_N, KC_M, SE_COMM, SE_DOT, SE_SLSH, KC_SHIFT,
+                       KC_SHIFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_MUTE, TG(_GAMING), KC_N, KC_M, SE_COMM, SE_DOT, SE_SLSH, KC_SHIFT,
                        KC_LGUI, KC_LALT, KC_LCTRL, KC_LOWER, KC_SPC, KC_ENT, KC_RAISE, KC_RCTRL, KC_RALT, KC_RGUI),
 
     /*
@@ -148,7 +149,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * | RESET|      |QWERTY|      |      |      |                    |      |      |      |      |      |      |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
      * |      |      |MACWIN|      |      |      |-------.    ,-------|      | VOLDO| MUTE | VOLUP|      |      |
-     * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
+     * |------+------+------+------+------+------|  MUTE |    | GAMING|------+------+------+------+------+------|
      * |      |      |      |      |      |      |-------|    |-------|      | PREV | PLAY | NEXT |      |      |
      * `-----------------------------------------/       /     \      \-----------------------------------------'
      *            | LGUI | LAlt | LCTR |LOWER | /Space  /       \Enter \  |RAISE | RCTR | RAlt | RGUI |
@@ -159,7 +160,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        RESET, XXXXXXX, KC_QWERTY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                        XXXXXXX, XXXXXXX, CG_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
-                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______)};
+                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______),
+
+    /*
+     * GAMING
+     * ,-----------------------------------------.                    ,-----------------------------------------.
+     * |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  \   |
+     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+     * | ESC  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  | Bspc |
+     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+     * | Tab  |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
+     * |------+------+------+------+------+------|       |    | GAMING|------+------+------+------+------+------|
+     * | Shift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  | Shift|
+     * `-----------------------------------------/       /     \      \-----------------------------------------'
+     *            | LGUI | LAlt | LCTR |LOWER | /SPACE  /       \ ENTER\  |RAISE | RCTR | RAlt | RGUI |
+     *            |      |      |      |      |/       /         \      \ |      |      |      |      |
+     *            `----------------------------------'           '------''---------------------------'
+     */
+
+    [_GAMING] = LAYOUT(SE_GRV, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, SE_BSLS,
+                       KC_ESC, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPC,
+                       LCTL_T(KC_TAB), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, SE_SCLN, SE_QUOT,
+                       KC_LSHIFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_MUTE, TG(_GAMING), KC_N, KC_M, SE_COMM, SE_DOT, SE_SLSH, KC_RSHIFT,
+                       KC_LGUI, KC_LALT, KC_LCTRL, KC_LOWER, KC_SPC, KC_ENT, KC_RAISE, KC_RCTRL, KC_RALT, KC_RGUI)};
+
+
+
 // clang-format on
 #ifdef OLED_ENABLE
 
@@ -198,6 +224,9 @@ static void print_status_narrow(void) {
         case _ADJUST:
             oled_write_P(PSTR("Adj\n"), false);
             break;
+        case _GAMING:
+            oled_write_P(PSTR("Game\n"), false);
+            break;
         default:
             oled_write_ln_P(PSTR("Undef"), false);
     }
@@ -208,6 +237,7 @@ static void print_status_narrow(void) {
         case _RAISE:
         case _LOWER:
         case _ADJUST:
+        case _GAMING:
             oled_write_ln_P(PSTR("SHIFT"), false);
             break;
         case _SHIFTED:
