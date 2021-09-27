@@ -6,3 +6,4 @@ for more options.
 */
 #define OLED_BRIGHTNESS 200
 #define OLED_TIMEOUT 300000
+#define NO_ACTION_ONESHOT
