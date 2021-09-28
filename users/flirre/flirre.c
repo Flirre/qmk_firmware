@@ -76,11 +76,9 @@ uint16_t navesc_timer = 0;
 
 // Interrupts all timers
 void timer_timeout(void) {
-#ifdef DANISH_ENABLE
     lshiftp = false;
     rshiftp = false;
-#endif
-    navesc = false;
+    navesc  = false;
     timer_timeout_keymap();
 }
 
@@ -116,6 +114,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_on(_ADJUST);
             } else {
                 layer_off(_ADJUST);
+            }
+            return false;
+        case KC_MAC_LOWER:
+            if (record->event.pressed) {
+                layer_on(_MAC_LOWER);
+                update_tri_layer(_MAC_LOWER, _MAC_RAISE, _MAC_ADJUST);
+            } else {
+                layer_off(_MAC_LOWER);
+                update_tri_layer(_MAC_LOWER, _MAC_RAISE, _MAC_ADJUST);
+            }
+            return false;
+        case KC_MAC_RAISE:
+            if (record->event.pressed) {
+                layer_on(_MAC_RAISE);
+                update_tri_layer(_MAC_LOWER, _MAC_RAISE, _MAC_ADJUST);
+            } else {
+                layer_off(_MAC_RAISE);
+                update_tri_layer(_MAC_LOWER, _MAC_RAISE, _MAC_ADJUST);
+            }
+            return false;
+        case KC_MAC_ADJUST:
+            if (record->event.pressed) {
+                layer_on(_MAC_ADJUST);
+            } else {
+                layer_off(_MAC_ADJUST);
             }
             return false;
         case OSX_TOGG:
@@ -331,6 +354,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             NORM_ALGRSHIFT(SE_9, SE_9)
         case CU_BSLS:
             SHIFT_ALGR(SE_PLUS, SE_LABK)
+        case CA_BSLS:
+            if (record->event.pressed) {
+                timer_timeout();
+                if (lshift || rshift) {
+                    register_code(KC_LSFT);
+                    register_code(KC_ALGR);
+                    unregister_code(AE_7);
+                    tap_code(AE_7);
+                    unregister_code(AE_7);
+                } else {
+                    register_code(KC_ALGR);
+                    unregister_code(AE_7);
+                    tap_code(AE_7);
+                }
+                unregister_code(KC_ALGR);
+                unregister_code(KC_LSFT);
+            }
+            return false;
+        case CA_LABK:
+        case CA_RABK:
         case KC_LCTL:
         case KC_RCTL:
             if (!record->event.pressed) {

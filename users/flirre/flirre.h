@@ -29,7 +29,6 @@ enum userspace_layers {
     _MAC_RAISE,
     _MAC_ADJUST,
     _GAMING,
-    _DEADKEY = 14,  // Change if more than 16 layers are required
 };
 
 enum userspace_custom_keycodes {
@@ -37,6 +36,9 @@ enum userspace_custom_keycodes {
     KC_LOWER,
     KC_RAISE,
     KC_ADJUST,
+    KC_MAC_LOWER,
+    KC_MAC_RAISE,
+    KC_MAC_ADJUST,
     KC_SHIFT,
     KC_PRVWD,
     KC_NXTWD,
@@ -65,6 +67,9 @@ enum userspace_custom_keycodes {
     CU_LBRC,        // [ | {
     CU_RBRC,        // ] | }
     CU_BSLS,        // \ | |
+    CA_BSLS,        //  \ | |
+    CA_LABK,        //  < | ,
+    CA_RABK,        //  > | .
     NEW_SAFE_RANGE  // Use for keymap specific keycodes
 };
 
