@@ -84,6 +84,21 @@ void timer_timeout(void) {
 
 __attribute__((weak)) void timer_timeout_keymap(void) {}
 
+void toggle_osx_mode(void) {
+    keymap_config.swap_lctl_lgui = !keymap_config.swap_lctl_lgui;
+    keymap_config.swap_rctl_rgui = keymap_config.swap_lctl_lgui;
+
+    if (!keymap_config.swap_lctl_lgui) {
+        layer_on(_QWERTY);
+        layer_off(_MAC_QWERTY);
+        default_layer_set(_QWERTY);
+    } else {
+        layer_on(_MAC_QWERTY);
+        layer_off(_QWERTY);
+        default_layer_set(_MAC_QWERTY);
+    }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case KC_QWERTY:
@@ -141,22 +156,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_off(_MAC_ADJUST);
             }
             return false;
-        case OSX_TOGG:
+        case OS_TOGG:
             if (record->event.pressed) {
-                register_code16(CG_TOGG);
-                register_code16(DF(_MAC_QWERTY));
-            } else {
-                unregister_code16(CG_TOGG);
-                unregister_code16(DF(_MAC_QWERTY));
-            }
-            return false;
-        case LNX_TOGG:
-            if (record->event.pressed) {
-                register_code16(CG_TOGG);
-                register_code16(DF(_QWERTY));
-            } else {
-                unregister_code16(CG_TOGG);
-                unregister_code16(DF(_QWERTY));
+                toggle_osx_mode();
             }
             return false;
         case KC_PRVWD:
@@ -372,8 +374,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_LSFT);
             }
             return false;
-        case CA_LABK:
-        case CA_RABK:
+        case CA_COMM:
+            SHIFT_NO(AE_COMM, AE_LABK);
+        case CA_DOT:
+            SHIFT_NORM(AE_DOT, AE_LABK);
         case KC_LCTL:
         case KC_RCTL:
             if (!record->event.pressed) {

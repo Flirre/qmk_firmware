@@ -21,12 +21,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 enum userspace_layers {
     _QWERTY,
-    _LOWER,
-    _RAISE,
-    _ADJUST,
     _MAC_QWERTY,
+    _LOWER,
     _MAC_LOWER,
+    _RAISE,
     _MAC_RAISE,
+    _ADJUST,
     _MAC_ADJUST,
     _GAMING,
 };
@@ -68,8 +68,8 @@ enum userspace_custom_keycodes {
     CU_RBRC,        // ] | }
     CU_BSLS,        // \ | |
     CA_BSLS,        //  \ | |
-    CA_LABK,        //  < | ,
-    CA_RABK,        //  > | .
+    CA_COMM,        //  , | <
+    CA_DOT,         //  . | >
     NEW_SAFE_RANGE  // Use for keymap specific keycodes
 };
 

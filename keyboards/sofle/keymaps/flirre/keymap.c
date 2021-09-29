@@ -28,6 +28,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         KC_LGUI, KC_LALT, KC_LCTRL, KC_LOWER, KC_SPC,              KC_ENT, KC_RAISE, KC_RCTRL, KC_RALT, KC_RGUI
 ),
 
+    [_MAC_QWERTY] = LAYOUT( \
+    AE_GRV,           KC_1,   CU_2,   KC_3,   CU_4,   KC_5,                                    CU_6,    CU_7,        CU_8,      CU_9,     CU_0,      CA_BSLS, \
+    KC_ESC,           KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                    KC_Y,    KC_U,        KC_I,      KC_O,     KC_P,      KC_BSPC, \
+    LCTL_T(KC_TAB),   KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                    KC_H,    KC_J,        KC_K,      KC_L,     CU_SCLN,   CU_QUOT, \
+    CU_LSFT,         KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_MUTE,             XXXXXXX,KC_N,    KC_M,        CA_COMM,   CA_DOT,   CU_SLSH,   CU_RSFT,\
+                        KC_LGUI, KC_LALT, KC_LCTRL, KC_MAC_LOWER, KC_SPC,              KC_ENT, KC_MAC_RAISE, KC_RCTRL, KC_RALT, KC_RGUI
+),
+
+
     /* LOWER
      * ,-----------------------------------------.                    ,-----------------------------------------.
      * |  ´   |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  | F11  |
@@ -47,6 +56,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       _______, SE_EXLM, SE_AT, SE_HASH, SE_DLR, SE_PERC, SE_CIRC, SE_AMPR, SE_ASTR, SE_LPRN, SE_RPRN, SE_PIPE,
                       _______, SE_EQL, SE_MINS, SE_PLUS, SE_LCBR, SE_RCBR, _______, _______, SE_LBRC, SE_RBRC, SE_SCLN, SE_COLN, SE_BSLS,
                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______),
+
+    [_MAC_LOWER] = LAYOUT(AE_ACUT, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,
+                      AE_GRV, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_F12,
+                      _______, AE_EXLM, AE_AT, AE_HASH, AE_DLR, AE_PERC, AE_CIRC, AE_AMPR, AE_ASTR, AE_LPRN, AE_RPRN, AE_PIPE,
+                      _______, AE_EQL, AE_MINS, AE_PLUS, AE_LCBR, AE_RCBR, _______, _______, AE_LBRC, AE_RBRC, AE_SCLN, AE_COLN, AE_BSLS,
+                      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______),
+
 
     /* RAISE
      * ,----------------------------------------.                    ,-----------------------------------------.
@@ -69,6 +85,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______),
 
 
+    [_MAC_RAISE] = LAYOUT(_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DLINE, KC_DEL,
+                      _______, KC_INS, KC_PSCR, KC_APP, XXXXXXX, XXXXXXX, KC_PGUP, KC_PRVWD, KC_UP, KC_NXTWD, AE_ARNG, KC_BSPC,
+                      _______, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX, KC_CAPS, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, AE_ODIA, AE_ADIA,
+                      _______, KC_UNDO, KC_CUT, KC_COPY, KC_PASTE, XXXXXXX, _______, _______, XXXXXXX, KC_LSTRT, XXXXXXX, KC_LEND, XXXXXXX, _______,
+                      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______),
+
+
+
+
 
     /* ADJUST
      * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -84,37 +109,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *            |      |      |      |      |/       /         \      \ |      |      |      |      |
      *            `----------------------------------'           '------''---------------------------'
      */
-    [_ADJUST] = LAYOUT(XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    [_ADJUST] =     LAYOUT(XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                        RESET, XXXXXXX, KC_QWERTY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                       XXXXXXX, XXXXXXX, OSX_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
+                       XXXXXXX, XXXXXXX, OS_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
                        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______),
 
 
-
-
-/* MACOS */
-    [_MAC_QWERTY] = LAYOUT(AE_GRV, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, CA_BSLS,
-                       KC_ESC, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPC,
-                       LCTL_T(KC_TAB), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, AE_SCLN, AE_QUOT,
-                       KC_SHIFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_MUTE, TG(_GAMING), KC_N, KC_M, AE_COMM, AE_DOT, AE_SLSH, KC_SHIFT,
-                       KC_LGUI, KC_LALT, KC_LCTRL, KC_LOWER, KC_SPC, KC_ENT, KC_RAISE, KC_RCTRL, KC_RALT, KC_RGUI),
-
-    [_MAC_LOWER] = LAYOUT(AE_ACUT, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,
-                      AE_GRV, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_F12,
-                      _______, AE_EXLM, AE_AT, AE_HASH, AE_DLR, AE_PERC, AE_CIRC, AE_AMPR, AE_ASTR, AE_LPRN, AE_RPRN, AE_PIPE,
-                      _______, AE_EQL, AE_MINS, AE_PLUS, AE_LCBR, AE_RCBR, _______, _______, AE_LBRC, AE_RBRC, AE_SCLN, AE_COLN, AE_BSLS,
-                      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______),
-
-    [_MAC_RAISE] = LAYOUT(_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DLINE, KC_DEL,
-                      _______, KC_INS, KC_PSCR, KC_APP, XXXXXXX, XXXXXXX, KC_PGUP, KC_PRVWD, KC_UP, KC_NXTWD, AE_ARNG, KC_BSPC,
-                      _______, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX, KC_CAPS, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, AE_ODIA, AE_ADIA,
-                      _______, KC_UNDO, KC_CUT, KC_COPY, KC_PASTE, XXXXXXX, _______, _______, XXXXXXX, KC_LSTRT, XXXXXXX, KC_LEND, XXXXXXX, _______,
-                      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______),
-
     [_MAC_ADJUST] = LAYOUT(XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                        RESET, XXXXXXX, KC_QWERTY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                       XXXXXXX, XXXXXXX, LNX_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
+                       XXXXXXX, XXXXXXX, OS_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
                        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______),
 
@@ -168,20 +172,28 @@ static void print_status_narrow(void) {
     oled_write_ln_P(PSTR("LAYER"), false);
     switch (get_highest_layer(layer_state)) {
         case _QWERTY:
-        case _MAC_QWERTY:
             oled_write_P(PSTR("Base\n"), false);
             break;
+        case _MAC_QWERTY:
+            oled_write_P(PSTR("ABase\n"), false);
+            break;
         case _RAISE:
-        case _MAC_RAISE:
             oled_write_P(PSTR("Raise"), false);
             break;
+        case _MAC_RAISE:
+            oled_write_P(PSTR("ARaise"), false);
+            break;
         case _LOWER:
-        case _MAC_LOWER:
             oled_write_P(PSTR("Lower"), false);
             break;
+        case _MAC_LOWER:
+            oled_write_P(PSTR("ALower"), false);
+            break;
         case _ADJUST:
-        case _MAC_ADJUST:
             oled_write_P(PSTR("Adj\n"), false);
+            break;
+        case _MAC_ADJUST:
+            oled_write_P(PSTR("AAdj\n"), false);
             break;
         case _GAMING:
             oled_write_P(PSTR("Game\n"), false);
