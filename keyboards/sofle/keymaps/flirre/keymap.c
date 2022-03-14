@@ -175,25 +175,25 @@ static void print_status_narrow(void) {
             oled_write_P(PSTR("Base\n"), false);
             break;
         case _MAC_QWERTY:
-            oled_write_P(PSTR("ABase\n"), false);
+            oled_write_P(PSTR("Base\n"), false);
             break;
         case _RAISE:
             oled_write_P(PSTR("Raise"), false);
             break;
         case _MAC_RAISE:
-            oled_write_P(PSTR("ARaise"), false);
+            oled_write_P(PSTR("Raise"), false);
             break;
         case _LOWER:
             oled_write_P(PSTR("Lower"), false);
             break;
         case _MAC_LOWER:
-            oled_write_P(PSTR("ALower"), false);
+            oled_write_P(PSTR("Lower"), false);
             break;
         case _ADJUST:
             oled_write_P(PSTR("Adj\n"), false);
             break;
         case _MAC_ADJUST:
-            oled_write_P(PSTR("AAdj\n"), false);
+            oled_write_P(PSTR("Adj\n"), false);
             break;
         case _GAMING:
             oled_write_P(PSTR("Game\n"), false);
