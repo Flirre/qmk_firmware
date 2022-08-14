@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 #include "keymap_swedish.h"
-#include "keymap_swedish_pro_osx_ansi.h"
+#include "keymap_swedish_pro_mac_ansi.h"
 
 enum userspace_layers {
     _QWERTY,
@@ -28,7 +28,6 @@ enum userspace_layers {
     _MAC_RAISE,
     _ADJUST,
     _MAC_ADJUST,
-    _GAMING,
 };
 
 enum userspace_custom_keycodes {
@@ -45,10 +44,9 @@ enum userspace_custom_keycodes {
     KC_LSTRT,
     KC_LEND,
     KC_DLINE,
-    OSX_TOGG,
-    LNX_TOGG,       // CU_GAME = SAFE_RANGE,     // Toggle game mode on/off
     CU_LSFT,        // LSFT | (
     CU_RSFT,        // LSFT | )
+    CU_GRV,         // ` | ~
     CU_COMM,        // , | <
     CU_DOT,         // . | >
     CU_SLSH,        // / | ?
@@ -70,7 +68,8 @@ enum userspace_custom_keycodes {
     CA_BSLS,        //  \ | |
     CA_COMM,        //  , | <
     CA_DOT,         //  . | >
-    NEW_SAFE_RANGE  // Use for keymap specific keycodes
+    CA_GRV,         // ` | ~
+    New_SAFE_RANGE  // Use for keymap specific keycodes
 };
 
 extern bool     lshift;
@@ -218,11 +217,33 @@ Templates for Keys, with custom shifted and non shifted Characters
         } else {                      \
             unregister_code(KC_ALGR); \
             unregister_code(KC_LSFT); \
-            tap_code(kc1);            \
+            tap_code16(kc1);            \
         }                             \
     } else {                          \
-        unregister_code(kc1);         \
+        unregister_code16(kc1);         \
         unregister_code(kc2);         \
+    }                                 \
+    return false;
+
+// Norm AltGr with space after, for dead keys
+#define DEAD_NORM_ALGR(kc1, kc2)      \
+    if (record->event.pressed) {      \
+        timer_timeout();              \
+        if (lshift || rshift) {       \
+            register_code(KC_ALGR);   \
+            unregister_code(KC_LSFT); \
+            tap_code(kc2);            \
+            unregister_code(KC_ALGR); \
+        } else {                      \
+            unregister_code(KC_ALGR); \
+            unregister_code(KC_LSFT); \
+            tap_code16(kc1);          \
+        }                             \
+    } else {                          \
+        unregister_code16(kc1);       \
+        unregister_code(kc2);         \
+        register_code(KC_SPC);        \
+        unregister_code(KC_SPC);      \
     }                                 \
     return false;
 

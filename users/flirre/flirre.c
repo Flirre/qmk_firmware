@@ -320,6 +320,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 rshift = false;
             }
             return false;
+        case CU_GRV:
+            DEAD_NORM_ALGR(SE_GRV, SE_DIAE);
         case CU_COMM:
             SHIFT_NO(SE_COMM, SE_LABK)
         case CU_DOT:
@@ -378,6 +380,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SHIFT_NO(AE_COMM, AE_LABK);
         case CA_DOT:
             SHIFT_NORM(AE_DOT, AE_LABK);
+        case CA_GRV:
+            DEAD_NORM_ALGR(AE_GRV, AE_DIAE);
         case KC_LCTL:
         case KC_RCTL:
             if (!record->event.pressed) {

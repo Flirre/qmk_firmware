@@ -21,7 +21,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
 
     [_QWERTY] = LAYOUT( \
-    SE_GRV,           KC_1,   CU_2,   KC_3,   CU_4,   KC_5,                                    CU_6,    CU_7,        CU_8,      CU_9,     CU_0,      CU_BSLS, \
+    CU_GRV,           KC_1,   CU_2,   KC_3,   CU_4,   KC_5,                                    CU_6,    CU_7,        CU_8,      CU_9,     CU_0,      CU_BSLS, \
     KC_ESC,           KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                    KC_Y,    KC_U,        KC_I,      KC_O,     KC_P,      KC_BSPC, \
     LCTL_T(KC_TAB),   KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                    KC_H,    KC_J,        KC_K,      KC_L,     CU_SCLN,   CU_QUOT, \
     CU_LSFT,         KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_MUTE,             XXXXXXX,KC_N,    KC_M,        CU_COMM,   CU_DOT,   CU_SLSH,   CU_RSFT,\
@@ -29,7 +29,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
     [_MAC_QWERTY] = LAYOUT( \
-    AE_GRV,           KC_1,   CU_2,   KC_3,   CU_4,   KC_5,                                    CU_6,    CU_7,        CU_8,      CU_9,     CU_0,      CA_BSLS, \
+    CA_GRV,           KC_1,   CU_2,   KC_3,   CU_4,   KC_5,                                    CU_6,    CU_7,        CU_8,      CU_9,     CU_0,      CA_BSLS, \
     KC_ESC,           KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                    KC_Y,    KC_U,        KC_I,      KC_O,     KC_P,      KC_BSPC, \
     LCTL_T(KC_TAB),   KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                    KC_H,    KC_J,        KC_K,      KC_L,     CU_SCLN,   CU_QUOT, \
     CU_LSFT,         KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_MUTE,             XXXXXXX,KC_N,    KC_M,        CA_COMM,   CA_DOT,   CU_SLSH,   CU_RSFT,\
@@ -52,13 +52,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *            `----------------------------------'           '------''---------------------------'
      */
     [_LOWER] = LAYOUT(SE_ACUT, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,
-                      SE_GRV, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_F12,
+                      CU_GRV, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_F12,
                       _______, SE_EXLM, SE_AT, SE_HASH, SE_DLR, SE_PERC, SE_CIRC, SE_AMPR, SE_ASTR, SE_LPRN, SE_RPRN, SE_PIPE,
                       _______, SE_EQL, SE_MINS, SE_PLUS, SE_LCBR, SE_RCBR, _______, _______, SE_LBRC, SE_RBRC, SE_SCLN, SE_COLN, SE_BSLS,
                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______),
 
     [_MAC_LOWER] = LAYOUT(AE_ACUT, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,
-                      AE_GRV, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_F12,
+                      CA_GRV, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_F12,
                       _______, AE_EXLM, AE_AT, AE_HASH, AE_DLR, AE_PERC, AE_CIRC, AE_AMPR, AE_ASTR, AE_LPRN, AE_RPRN, AE_PIPE,
                       _______, AE_EQL, AE_MINS, AE_PLUS, AE_LCBR, AE_RCBR, _______, _______, AE_LBRC, AE_RBRC, AE_SCLN, AE_COLN, AE_BSLS,
                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______),
@@ -102,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * | RESET|      |QWERTY|      |      |      |                    |      |      |      |      |      |      |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
      * |      |      |MACWIN|      |      |      |-------.    ,-------|      | VOLDO| MUTE | VOLUP|      |      |
-     * |------+------+------+------+------+------|  MUTE |    | GAMING|------+------+------+------+------+------|
+     * |------+------+------+------+------+------|  MUTE |    | XX    |------+------+------+------+------+------|
      * |      |      |      |      |      |      |-------|    |-------|      | PREV | PLAY | NEXT |      |      |
      * `-----------------------------------------/       /     \      \-----------------------------------------'
      *            | LGUI | LAlt | LCTR |LOWER | /Space  /       \Enter \  |RAISE | RCTR | RAlt | RGUI |
@@ -120,36 +120,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        RESET, XXXXXXX, KC_QWERTY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                        XXXXXXX, XXXXXXX, OS_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
-                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______),
-
-
+                           _______, _______, _______, _______, _______, _______, _______, _______, _______, _______)};
 /* END MACOS */
-
-
-
-    /*
-     * GAMING
-     * ,-----------------------------------------.                    ,-----------------------------------------.
-     * |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  \   |
-     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-     * | ESC  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  | Bspc |
-     * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-     * | Tab  |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
-     * |------+------+------+------+------+------|       |    | GAMING|------+------+------+------+------+------|
-     * | Shift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  | Shift|
-     * `-----------------------------------------/       /     \      \-----------------------------------------'
-     *            | LGUI | LAlt | LCTR |LOWER | /SPACE  /       \ ENTER\  |RAISE | RCTR | RAlt | RGUI |
-     *            |      |      |      |      |/       /         \      \ |      |      |      |      |
-     *            `----------------------------------'           '------''---------------------------'
-     */
-
-    [_GAMING] = LAYOUT(SE_GRV, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, SE_BSLS,
-                       KC_ESC, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPC,
-                       LCTL_T(KC_TAB), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, SE_SCLN, SE_QUOT,
-                       KC_LSHIFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_MUTE, TG(_GAMING), KC_N, KC_M, SE_COMM, SE_DOT, SE_SLSH, KC_RSHIFT,
-                       KC_LGUI, KC_LALT, KC_LCTRL, KC_LOWER, KC_SPC, KC_ENT, KC_RAISE, KC_RCTRL, KC_RALT, KC_RGUI)};
-
 // clang-format on
+
 #ifdef OLED_ENABLE
 
 static void render_logo(void) {
@@ -195,9 +169,6 @@ static void print_status_narrow(void) {
         case _MAC_ADJUST:
             oled_write_P(PSTR("Adj\n"), false);
             break;
-        case _GAMING:
-            oled_write_P(PSTR("Game\n"), false);
-            break;
         default:
             oled_write_ln_P(PSTR("Undef"), false);
     }
@@ -214,12 +185,13 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return rotation;
 }
 
-void oled_task_user(void) {
+bool oled_task_user(void) {
     if (is_keyboard_master()) {
         print_status_narrow();
     } else {
         render_logo();
     }
+    return false;
 }
 
 #endif
@@ -234,20 +206,30 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             tap_code(KC_VOLD);
         }
     } else if (index == 1) {
-        if (clockwise) {
-            register_mods(mod_config(MOD_LCTL));
-            register_mods(mod_config(MOD_LGUI));
-            register_code(KC_UP);
-            unregister_mods(mod_config(MOD_LCTL));
-            unregister_mods(mod_config(MOD_LGUI));
-            unregister_code(KC_UP);
+        if (get_highest_layer(layer_state) == _LOWER) {
+            if (clockwise) {
+                tap_code(KC_F18);
+                tap_code(KC_R);
+            } else {
+                tap_code(KC_F18);
+                tap_code(KC_U);
+            }
         } else {
-            register_mods(mod_config(MOD_LCTL));
-            register_mods(mod_config(MOD_LGUI));
-            register_code(KC_DOWN);
-            unregister_mods(mod_config(MOD_LCTL));
-            unregister_mods(mod_config(MOD_LGUI));
-            unregister_code(KC_DOWN);
+            if (clockwise) {
+                register_mods(mod_config(MOD_LCTL));
+                register_mods(mod_config(MOD_LGUI));
+                register_code(KC_UP);
+                unregister_mods(mod_config(MOD_LCTL));
+                unregister_mods(mod_config(MOD_LGUI));
+                unregister_code(KC_UP);
+            } else {
+                register_mods(mod_config(MOD_LCTL));
+                register_mods(mod_config(MOD_LGUI));
+                register_code(KC_DOWN);
+                unregister_mods(mod_config(MOD_LCTL));
+                unregister_mods(mod_config(MOD_LGUI));
+                unregister_code(KC_DOWN);
+            }
         }
     }
     return true;
