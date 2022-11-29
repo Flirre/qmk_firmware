@@ -206,13 +206,13 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             tap_code(KC_VOLD);
         }
     } else if (index == 1) {
-        if (get_highest_layer(layer_state) == _LOWER) {
+        if (get_highest_layer(layer_state) == _LOWER || get_highest_layer(layer_state) == _MAC_LOWER) {
             if (clockwise) {
                 tap_code(KC_F18);
-                tap_code(KC_R);
+                tap_code(KC_U);
             } else {
                 tap_code(KC_F18);
-                tap_code(KC_U);
+                tap_code(KC_R);
             }
         } else {
             if (clockwise) {
