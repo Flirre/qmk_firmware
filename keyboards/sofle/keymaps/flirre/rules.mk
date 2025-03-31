@@ -1,7 +1,7 @@
+# Bootloader selection
+BOOTLOADER = rp2040
+MCU = RP2040
+
 OLED_ENABLE        = yes
-OLED_DRIVER        = SSD1306
+TRI_LAYER_ENABLE = yes
 ENCODER_ENABLE     = yes
-CONSOLE_ENABLE     = no
-EXTRAKEY_ENABLE    = yes
-COMMAND_ENABLE     = no
-LTO_ENABLE         = yes

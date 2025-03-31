@@ -25,7 +25,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,           KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                    KC_Y,    KC_U,        KC_I,      KC_O,     KC_P,      KC_BSPC, \
     LCTL_T(KC_TAB),   KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                    KC_H,    KC_J,        KC_K,      KC_L,     CU_SCLN,   CU_QUOT, \
     CU_LSFT,         KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_MUTE,             XXXXXXX,KC_N,    KC_M,        CU_COMM,   CU_DOT,   CU_SLSH,   CU_RSFT,\
-                        KC_LGUI, KC_LALT, KC_LCTRL, KC_LOWER, KC_SPC,              KC_ENT, KC_RAISE, KC_RCTRL, KC_RALT, KC_RGUI
+                        KC_LGUI, KC_LALT, KC_LCTL, KC_LOWER, KC_SPC,              KC_ENT, KC_RAISE, KC_RCTL, KC_RALT, KC_RGUI
 ),
 
     [_MAC_QWERTY] = LAYOUT( \
@@ -33,7 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,           KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                    KC_Y,    KC_U,        KC_I,      KC_O,     KC_P,      KC_BSPC, \
     LCTL_T(KC_TAB),   KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                    KC_H,    KC_J,        KC_K,      KC_L,     CU_SCLN,   CU_QUOT, \
     CU_LSFT,         KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_MUTE,             XXXXXXX,KC_N,    KC_M,        CA_COMM,   CA_DOT,   CU_SLSH,   CU_RSFT,\
-                        KC_LGUI, KC_LALT, KC_LCTRL, KC_MAC_LOWER, KC_SPC,              KC_ENT, KC_MAC_RAISE, KC_RCTRL, KC_RALT, KC_RGUI
+                        KC_LGUI, KC_LALT, KC_LCTL, KC_MAC_LOWER, KC_SPC,              KC_ENT, KC_MAC_RAISE, KC_RCTL, KC_RALT, KC_RGUI
 ),
 
 
@@ -110,14 +110,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *            `----------------------------------'           '------''---------------------------'
      */
     [_ADJUST] =     LAYOUT(XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                       RESET, XXXXXXX, KC_QWERTY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                       QK_BOOT, XXXXXXX, KC_QWERTY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                        XXXXXXX, XXXXXXX, OS_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
                        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______),
 
 
     [_MAC_ADJUST] = LAYOUT(XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                       RESET, XXXXXXX, KC_QWERTY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                       QK_BOOT, XXXXXXX, KC_QWERTY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                        XXXXXXX, XXXXXXX, OS_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
                            _______, _______, _______, _______, _______, _______, _______, _______, _______, _______)};
@@ -199,40 +199,30 @@ bool oled_task_user(void) {
 #ifdef ENCODER_ENABLE
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (index == 0) {
+    if (index == 1) {
         if (!clockwise) {
             tap_code(KC_VOLU);
         } else {
             tap_code(KC_VOLD);
         }
-    } else if (index == 1) {
-        if (get_highest_layer(layer_state) == _LOWER || get_highest_layer(layer_state) == _MAC_LOWER) {
+    } else if (index == 0) {
+        if (get_highest_layer(layer_state) == _RAISE || get_highest_layer(layer_state) == _MAC_RAISE) {
             if (clockwise) {
                 tap_code(KC_F18);
-                tap_code(KC_U);
             } else {
-                tap_code(KC_F18);
-                tap_code(KC_R);
+                tap_code(KC_F19);
             }
         } else {
             if (clockwise) {
-                register_mods(mod_config(MOD_LCTL));
-                register_mods(mod_config(MOD_LGUI));
-                register_code(KC_UP);
-                unregister_mods(mod_config(MOD_LCTL));
-                unregister_mods(mod_config(MOD_LGUI));
-                unregister_code(KC_UP);
+                tap_code(KC_F16);
+                return false;
             } else {
-                register_mods(mod_config(MOD_LCTL));
-                register_mods(mod_config(MOD_LGUI));
-                register_code(KC_DOWN);
-                unregister_mods(mod_config(MOD_LCTL));
-                unregister_mods(mod_config(MOD_LGUI));
-                unregister_code(KC_DOWN);
+                tap_code(KC_F17);
+                return false;
             }
         }
     }
-    return true;
+    return false;
 }
 
 #endif

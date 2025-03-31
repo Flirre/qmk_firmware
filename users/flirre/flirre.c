@@ -92,10 +92,12 @@ void toggle_osx_mode(void) {
         layer_on(_QWERTY);
         layer_off(_MAC_QWERTY);
         default_layer_set(_QWERTY);
+        set_single_persistent_default_layer(_QWERTY); // sus?
     } else {
         layer_on(_MAC_QWERTY);
         layer_off(_QWERTY);
         default_layer_set(_MAC_QWERTY);
+        set_single_persistent_default_layer(_MAC_QWERTY); // sus?
     }
 }
 
@@ -405,4 +407,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return false;
 }
 
-__attribute__((weak)) bool process_record_keymap(uint16_t keycode, keyrecord_t *record) { return true; }
+__attribute__((weak)) bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
+    return true;
+}
